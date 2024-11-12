@@ -1,8 +1,8 @@
 {
     "name": "trustcaptcha/trustcaptcha-craftcms",
-    "description": "Trustcaptcha library for CraftCMS, providing captcha, security features, and GDPR-compliant user verification.",
+    "description": "Trustcaptcha library for CraftCMS. The CAPTCHA, with a focus on user-experience and GDPR compliance.",
     "type": "craft-plugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "keywords": [
         "captcha",
         "security",
@@ -48,8 +48,8 @@
     "extra": {
         "name": "Trustcaptcha",
         "handle": "trustcaptcha-craftcms",
-        "version": "1.0.0",
-        "description": "Integration von Trustcaptcha in Craft CMS.",
+        "version": "1.0.1",
+        "description": "The CAPTCHA, with a focus on user-experience and GDPR compliance.",
         "developer": "Trustcaptcha GmbH",
         "developerUrl": "https://trustcaptcha.com",
         "documentationUrl": "https://www.trustcaptcha.com/de/documentation/platforms/craftcms"
