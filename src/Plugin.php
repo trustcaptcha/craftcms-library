@@ -11,6 +11,8 @@ use craft\events\RegisterTemplateRootsEvent;
 use craft\web\twig\variables\CraftVariable;
 use craft\web\View;
 use TrustcaptchaCraftcms\plugins\FormieTrustcaptchaCraftcms;
+use verbb\formie\events\RegisterIntegrationsEvent;
+use verbb\formie\services\Integrations;
 use yii\base\Event;
 use yii\base\ModelEvent;
 
@@ -94,10 +96,10 @@ class Plugin extends BasePlugin
 
     private function attachEventHandlers(): void {
 
-        if (class_exists('verbb\formie\services\Integrations') && class_exists('verbb\formie\events\RegisterIntegrationsEvent')) {
+        if (Craft::$app->plugins->isPluginInstalled('formie')) {
             Event::on(
-                'verbb\formie\services\Integrations',
-                'registerIntegrations',
+                Integrations::class,
+                Integrations::EVENT_REGISTER_INTEGRATIONS,
                 function($event) {
                     $event->captchas[] = FormieTrustcaptchaCraftcms::class;
                 }
