@@ -1,0 +1,206 @@
+{% import "_includes/forms" as forms %}
+
+<h2>Trustcaptcha Settings</h2>
+
+<div class="pane">
+    <p>
+        <span class="info" data-icon="alert"></span>
+        You can find your site key, secret key and license key on our website in your <a href="https://www.trustcaptcha.com/de/captchas/dashboard" target="_blank">Captcha administration</a>. Here you can also create new captchas or manage existing ones.
+    </p>
+</div>
+
+{{ forms.autosuggestField({
+    label: 'Site key',
+    instructions: 'Site key of your CAPTCHA.',
+    id: 'sitekey',
+    name: 'sitekey',
+    value: settings.sitekey ?? '',
+    required: true,
+    suggestEnvVars: true,
+    errors: settings.getErrors('sitekey')
+})
+}}
+
+{{ forms.autosuggestField({
+    label: 'Secret key',
+    instructions: 'Site key of your CAPTCHA.',
+    id: 'secret_key',
+    name: 'secret_key',
+    value: settings.secret_key ?? '',
+    required: true,
+    suggestEnvVars: true,
+    errors: settings.getErrors('secret_key')
+})
+}}
+
+{{ forms.autosuggestField({
+    label: 'License',
+    instructions: 'License key of your CAPTCHA. Required for setting options like hide branding, slider or invisible.',
+    id: 'license',
+    name: 'license',
+    value: settings.license ?? '',
+    required: false,
+    suggestEnvVars: true,
+    errors: settings.getErrors('license')
+})
+}}
+
+{{ forms.textField({
+    label: 'Threshold',
+    instructions: 'Set the threshold as a decimal between 0 (human) and 1 (probably a bot). Recommended value: 0.5.',
+    id: 'threshold',
+    name: 'threshold',
+    value: settings.threshold ?? 0.5,
+    required: true,
+    type: 'number',
+    min: 0,
+    max: 1,
+    step: 0.05,
+    errors: settings.getErrors('threshold')
+})
+}}
+
+<hr>
+
+<h2>Individual settings:</h2>
+
+{{ forms.selectField({
+    label: 'Language',
+    instructions: 'Display language of the Trustcaptcha component.',
+    id: 'language',
+    name: 'language',
+    value: settings.language ?? 'auto',
+    options: [
+        { label: 'Auto (Automatic language detection)', value: 'auto' },
+        { label: 'Albanian', value: 'sq' },
+        { label: 'Arabic', value: 'ar' },
+        { label: 'Belarusian', value: 'be' },
+        { label: 'Bosnian', value: 'bs' },
+        { label: 'Bulgarian', value: 'bg' },
+        { label: 'Catalan', value: 'ca' },
+        { label: 'Chinese', value: 'zh' },
+        { label: 'Croatian', value: 'hr' },
+        { label: 'Czech', value: 'cs' },
+        { label: 'Danish', value: 'da' },
+        { label: 'Dutch', value: 'nl' },
+        { label: 'English', value: 'en' },
+        { label: 'Estonian', value: 'et' },
+        { label: 'Finnish', value: 'fi' },
+        { label: 'French', value: 'fr' },
+        { label: 'German', value: 'de' },
+        { label: 'Greek', value: 'el' },
+        { label: 'Hindi', value: 'hi' },
+        { label: 'Hungarian', value: 'hu' },
+        { label: 'Italian', value: 'it' },
+        { label: 'Korean', value: 'ko' },
+        { label: 'Latvian', value: 'lv' },
+        { label: 'Lithuanian', value: 'lt' },
+        { label: 'Luxembourgish', value: 'lb' },
+        { label: 'Macedonian', value: 'mk' },
+        { label: 'Norwegian', value: 'no' },
+        { label: 'Polish', value: 'pl' },
+        { label: 'Portuguese', value: 'pt' },
+        { label: 'Romanian', value: 'ro' },
+        { label: 'Russian', value: 'ru' },
+        { label: 'Serbian', value: 'sr' },
+        { label: 'Slovak', value: 'sk' },
+        { label: 'Slovenian', value: 'sl' },
+        { label: 'Spanish', value: 'es' },
+        { label: 'Swedish', value: 'sv' },
+        { label: 'Turkish', value: 'tr' },
+        { label: 'Ukrainian', value: 'uk' },
+    ],
+    errors: settings.getErrors('language')
+})
+}}
+
+{{ forms.selectField({
+    label: 'Theme',
+    instructions: 'Display mode of the Trustcaptcha component.',
+    id: 'theme',
+    name: 'theme',
+    value: settings.theme ?? 'light',
+    options: [
+        { label: 'Light', value: 'light' },
+        { label: 'Dark', value: 'dark' },
+        { label: 'System Preference', value: 'media' }
+    ],
+    errors: settings.getErrors('theme')
+})
+}}
+
+{{ forms.lightswitchField({
+    label: 'Autostart',
+    instructions: 'Setting whether the CAPTCHA should start automatically.',
+    id: 'autostart',
+    name: 'autostart',
+    on: settings.autostart ?? false
+})
+}}
+
+{{ forms.selectField({
+    label: 'Slider',
+    instructions: 'Setting to display the slider. License key required!',
+    id: 'slider',
+    name: 'slider',
+    value: settings.slider ?? 'disabled',
+    options: [
+        { label: 'Disabled', value: 'disabled' },
+        { label: 'Inline', value: 'inline' },
+        { label: 'Popup', value: 'popup' }
+    ],
+    errors: settings.getErrors('slider')
+})
+}}
+
+{{ forms.lightswitchField({
+    label: 'Hide branding',
+    instructions: 'Setting to hide the Trustcaptcha branding. License key required!',
+    id: 'hide_branding',
+    name: 'hide_branding',
+    on: settings.hide_branding ?? false
+})
+}}
+
+{{ forms.lightswitchField({
+    label: 'Invisible',
+    instructions: 'Setting to make the CAPTCHA invisible. License key required!.',
+    id: 'invisible',
+    name: 'invisible',
+    on: settings.invisible ?? false
+})
+}}
+
+<hr>
+
+<h2>Validate forms automatically:</h2>
+
+{{ forms.lightswitchField({
+    label: 'Validate contact forms',
+    instructions: 'Enable validation of forms of contact form [Contact Form plugin](https://github.com/craftcms/contact-form).',
+    id: 'validateContactForm',
+    name: 'validateContactForm',
+    on: settings.validateContactForm ?? false
+})
+}}
+
+{{ forms.lightswitchField({
+    label: 'Validate users registration',
+    instructions: 'Enable validation of user registration forms',
+    id: 'validateUsersRegistration',
+    name: 'validateUsersRegistration',
+    on: settings.validateUsersRegistration ?? false
+})
+}}
+
+<div class="pane">
+    <p>
+        <span class="warning" data-icon="alert"></span>
+        You still have to add Trustcaptcha to your forms. You can find more detailed information in our <a href="https://docs.trustcaptcha.com/en/documentation/platforms/craftcms" target="_blank">CraftCMS documentation</a>.
+    </p>
+</div>
+
+
+
+
+

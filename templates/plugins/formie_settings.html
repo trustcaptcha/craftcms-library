@@ -1,0 +1,173 @@
+{% import '_includes/forms' as forms %}
+{% import 'verbb-base/_macros' as macros %}
+
+<h2>Trustcaptcha Settings</h2>
+
+<div class="pane">
+    <p>
+        <span class="info" data-icon="alert"></span>
+        You can find your site key, secret key and license key on our website in your <a href="https://www.trustcaptcha.com/de/captchas/dashboard" target="_blank">Captcha administration</a>. Here you can also create new captchas or manage existing ones.
+    </p>
+</div>
+
+{{ forms.autosuggestField({
+    label: 'Site key',
+    instructions: 'Site key of your CAPTCHA.',
+    id: 'sitekey',
+    name: 'sitekey',
+    value: integration.settings.sitekey ?? '',
+    required: true,
+    suggestEnvVars: true,
+    warning: macros.configWarning('sitekey', 'formie'),
+})
+}}
+
+{{ forms.autosuggestField({
+    label: 'Secret key',
+    instructions: 'Site key of your CAPTCHA.',
+    id: 'secret_key',
+    name: 'secret_key',
+    value: integration.settings.secret_key ?? '',
+    required: true,
+    suggestEnvVars: true,
+    warning: macros.configWarning('secret_key', 'formie'),
+})
+}}
+
+{{ forms.autosuggestField({
+    label: 'License',
+    instructions: 'License key of your CAPTCHA. Required for setting options like hide branding, slider or invisible.',
+    id: 'license',
+    name: 'license',
+    value: integration.settings.license ?? '',
+    required: false,
+    suggestEnvVars: true,
+    warning: macros.configWarning('license', 'formie'),
+})
+}}
+
+{{ forms.textField({
+    label: 'Threshold',
+    instructions: 'Set the threshold as a decimal between 0 (human) and 1 (probably a bot). Recommended value: 0.5.',
+    id: 'threshold',
+    name: 'threshold',
+    value: integration.settings.threshold ?? 0.5,
+    required: true,
+    type: 'number',
+    min: 0,
+    max: 1,
+    step: 0.05,
+    warning: macros.configWarning('threshold', 'formie'),
+})
+}}
+
+<hr>
+
+<h2>Individual settings:</h2>
+
+{{ forms.selectField({
+    label: 'Language',
+    instructions: 'Display language of the Trustcaptcha component.',
+    id: 'language',
+    name: 'language',
+    value: integration.settings.language ?? 'auto',
+    options: [
+        { label: 'Auto (Automatic language detection)', value: 'auto' },
+        { label: 'Albanian', value: 'sq' },
+        { label: 'Arabic', value: 'ar' },
+        { label: 'Belarusian', value: 'be' },
+        { label: 'Bosnian', value: 'bs' },
+        { label: 'Bulgarian', value: 'bg' },
+        { label: 'Catalan', value: 'ca' },
+        { label: 'Chinese', value: 'zh' },
+        { label: 'Croatian', value: 'hr' },
+        { label: 'Czech', value: 'cs' },
+        { label: 'Danish', value: 'da' },
+        { label: 'Dutch', value: 'nl' },
+        { label: 'English', value: 'en' },
+        { label: 'Estonian', value: 'et' },
+        { label: 'Finnish', value: 'fi' },
+        { label: 'French', value: 'fr' },
+        { label: 'German', value: 'de' },
+        { label: 'Greek', value: 'el' },
+        { label: 'Hindi', value: 'hi' },
+        { label: 'Hungarian', value: 'hu' },
+        { label: 'Italian', value: 'it' },
+        { label: 'Korean', value: 'ko' },
+        { label: 'Latvian', value: 'lv' },
+        { label: 'Lithuanian', value: 'lt' },
+        { label: 'Luxembourgish', value: 'lb' },
+        { label: 'Macedonian', value: 'mk' },
+        { label: 'Norwegian', value: 'no' },
+        { label: 'Polish', value: 'pl' },
+        { label: 'Portuguese', value: 'pt' },
+        { label: 'Romanian', value: 'ro' },
+        { label: 'Russian', value: 'ru' },
+        { label: 'Serbian', value: 'sr' },
+        { label: 'Slovak', value: 'sk' },
+        { label: 'Slovenian', value: 'sl' },
+        { label: 'Spanish', value: 'es' },
+        { label: 'Swedish', value: 'sv' },
+        { label: 'Turkish', value: 'tr' },
+        { label: 'Ukrainian', value: 'uk' },
+    ],
+warning: macros.configWarning('language', 'formie'),
+})
+}}
+
+{{ forms.selectField({
+    label: 'Theme',
+    instructions: 'Display mode of the Trustcaptcha component.',
+    id: 'theme',
+    name: 'theme',
+    value: integration.settings.theme ?? 'light',
+    options: [
+        { label: 'Light', value: 'light' },
+        { label: 'Dark', value: 'dark' },
+        { label: 'System Preference', value: 'media' }
+    ],
+    warning: macros.configWarning('theme', 'formie'),
+})
+}}
+
+{{ forms.lightswitchField({
+    label: 'Autostart',
+    instructions: 'Setting whether the CAPTCHA should start automatically.',
+    id: 'autostart',
+    name: 'autostart',
+    on: integration.settings.autostart ?? false
+})
+}}
+
+{{ forms.selectField({
+    label: 'Slider',
+    instructions: 'Setting to display the slider. License key required!',
+    id: 'slider',
+    name: 'slider',
+    value: integration.settings.slider ?? 'disabled',
+    options: [
+        { label: 'Disabled', value: 'disabled' },
+        { label: 'Inline', value: 'inline' },
+        { label: 'Popup', value: 'popup' }
+    ],
+    warning: macros.configWarning('slider', 'formie'),
+})
+}}
+
+{{ forms.lightswitchField({
+    label: 'Hide branding',
+    instructions: 'Setting to hide the Trustcaptcha branding. License key required!',
+    id: 'hide_branding',
+    name: 'hide_branding',
+    on: integration.settings.hide_branding ?? false
+})
+}}
+
+{{ forms.lightswitchField({
+    label: 'Invisible',
+    instructions: 'Setting to make the CAPTCHA invisible. License key required!.',
+    id: 'invisible',
+    name: 'invisible',
+    on: integration.settings.invisible ?? false
+})
+}}

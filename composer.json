@@ -1,0 +1,75 @@
+{
+    "name": "trustcaptcha/trustcaptcha-craftcms",
+    "description": "Trustcaptcha library for CraftCMS, providing captcha, security features, and GDPR-compliant user verification.",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "captcha",
+        "security",
+        "craftcms",
+        "trustcaptcha",
+        "spam-protection",
+        "bot-detection",
+        "user-verification",
+        "craftcms-library",
+        "backend-security",
+        "server-security",
+        "gdpr",
+        "privacy",
+        "made-in-germany",
+        "eu",
+        "european-union"
+    ],
+    "homepage": "https://www.trustcaptcha.com",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Trustcaptcha GmbH",
+            "email": "mail@trustcaptcha.com"
+        }
+    ],
+    "support": {
+        "email": "mail@trustcaptcha.com"
+    },
+    "require": {
+        "php": ">=8.0.2",
+        "craftcms/cms": "^4.4.0|^5",
+        "trustcaptcha/trustcaptcha-php": "^1.1"
+    },
+    "require-dev": {
+        "craftcms/ecs": "dev-main",
+        "craftcms/phpstan": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "TrustcaptchaCraftcms\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Trustcaptcha",
+        "handle": "trustcaptcha-craftcms",
+        "version": "1.0.0",
+        "description": "Integration von Trustcaptcha in Craft CMS.",
+        "developer": "Trustcaptcha GmbH",
+        "developerUrl": "https://trustcaptcha.com",
+        "documentationUrl": "https://www.trustcaptcha.com/de/documentation/platforms/craftcms"
+    },
+    "scripts": {
+        "check-cs": "ecs check --ansi",
+        "fix-cs": "ecs check --ansi --fix",
+        "phpstan": "phpstan --memory-limit=1G"
+    },
+    "components": {
+        "validate": "CaptchaService"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.0.2"
+        },
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
+    }
+}
